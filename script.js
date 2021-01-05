@@ -1,14 +1,49 @@
 //Lottery generator. three sequences:
 //1º :: 7 (unique) Numbers (range 1 to 99) 
 //2º :: 2 (unique) Stars (range 1 to 9)
-//3º :: 1 greek leter 
+//3º :: 1 letter (range 1 to 25)
 var myArgs;
+var cars = ["Saab", "Volvo", "BMW"];
+var numbers = [1, 1, 3];
+function arrayTypeofValidator(array,type) {
+    var returner
+    array.forEach(element => { 
+    if(typeof element !== type)
+        returner=false
+    });
+    if(returner===false)
+        return false
+    return true
+}//checks the elements typeof inside the array if one of them is diferent than the type provided the function returns false, else returns true
+function arrayRepeatValuesFinder(array) {
+    var setedArray=Array.from(new Set(array))
+    if(array.length!==setedArray.length)
+        return true
+    return false
+    
+}
+//returns true if there are repeated values in the function by converting the array to a set which only allow unique values then 
+//convert back to array if I compare the length of this array with the original and the result is diferent we have repeated values
+function arrayRangeValidator(array,min,max) {
+    var returner
+    array.forEach(element => { 
+    if(element<min||element>max)
+        returner=false
+});
+    if(returner===false)
+        return false
+    return true
 
+}
+//validates each value of the array by check if its inside the range provided, returns false if one is outside range else true
 function argumentsChecker(){
+
 myArgs = process.argv.slice(2); //slice first 2 arguments 
-for (var i = 0; i < myArgs.length; i++) {
+for (var i = 0; i < myArgs.length-1; i++) {
     myArgs[i]=parseInt(myArgs[i])
 }
+
+//myArgs[myArgs.length]=String(myArgs[myArgs.length])
 if (myArgs.length < 10){
     console.log("To few arguments, you need to input 10 values")
     return process.exit(22);
@@ -18,6 +53,7 @@ if (myArgs.length > 10){
     return process.exit(22);
 }
 }
+//this function will validate the quantity of the arguments passed to the script if to few or to many the script will end 
 function factorial(n){
     //base case
     if(n == 0 || n == 1){
@@ -27,9 +63,11 @@ function factorial(n){
         return n * factorial(n-1);
     }
 }
+//factorial function to use in oddscalculator
 function createNumber(min,max) {
     return Math.floor(Math.random() * (max - min) + min);
-  }//base function that creates a random number with a range of a to b
+}
+//random number generator with range min to max
 function oddscalculator(correctnumbers,max,attempts) {
         var numberD=max;
         if (correctnumbers===0){
@@ -43,62 +81,52 @@ function oddscalculator(correctnumbers,max,attempts) {
             numberD=numberD*(i);
         }
         return (1/numberD)*factorial(correctnumbers);
-}  
+}
+//calculate the odds of the winning numbers the user had
 
-var dictionaryGreekSymbolArray = ["α","β","γ","δ","ε","ζ","η","θ","ι","κ","λ","μ","ν","ξ","ο","π","ρ","ς","τ","υ","φ","χ","ψ","ω"];//array with the greek letters
+var dictionarySymbolArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z"];//array with the greek letters
+
 var lottery = {
     myNumbersArray:[], 
     myStarsArray:[],
-    myGreekSymbolArray:[], 
+    mySymbolArray:[],
+    //arrays for the user input, will be filled after the argumentsChecker(), myNumbersArrayChecker(), myStarsChecker() and myGreekLetterChecker() functions validate the input
     myNumbersArrayChecker : function() {
-        var argNumberArray=myArgs.slice(0,myArgs.length-3); //slice fist 7 elements to get into new array 
-        argNumberArray.forEach(element => { 
-            if(element<1||element>99){
-                console.log("Number not in proper range, first 7 digits must be in the range of 1 and 99")
-                return process.exit(22);
-            }
-            var sorted_arr = argNumberArray.slice().sort();
-            for (var i = 0; i < sorted_arr.length - 1; i++) {
-                if (sorted_arr[i + 1] === sorted_arr[i]) {
-                    console.log("Repeated Number")
-                    return process.exit(22);
-                }
-            }
-
-        });
+        var argNumberArray=myArgs.slice(0,myArgs.length-3); //slice first 7 elements of the arguments provided to the script into new array
+        if(arrayRangeValidator(argNumberArray,1,99)==false){
+            console.log("Number not in accepted range")
+            return process.exit(22);
+        }
+        if(arrayRepeatValuesFinder(argNumberArray)==true){
+            console.log("Repeated Number")
+            return process.exit(22);
+        }
         return lottery.myNumbersArray=argNumberArray.sort(function(a, b){return a-b});
+        //sorts in ascending order and saves the validated array into the proper array inside the object 
     },
     myStarsChecker : function() {
         var argStarArray=myArgs.slice(7,myArgs.length-1);
-        argStarArray.forEach(element => { 
-            if(element<1||element>9){
-                console.log("Star not in proper range, 8th and 9th digits must be in the range of 1 and 9")
-                return process.exit(22);
-            }
-            var sorted_arr = argStarArray.slice().sort();
-            for (var i = 0; i < sorted_arr.length - 1; i++) {
-                if (sorted_arr[i + 1] === sorted_arr[i]) {
-                    console.log("Repeated Star")
-                    return process.exit(22);
-                }
-                
-            }
-        });
-        return lottery.myStarsArray=argStarArray.sort(function(a, b){return a-b});
-    },
-    myGreekLetterChecker : function() {
-        var argGreekArray=myArgs.slice(9,myArgs.length);
-        argGreekArray[0]=argGreekArray[0]-1;
-        if(argGreekArray[0]<0||argGreekArray[0]>23){
-            console.log("Letter not in proper range, 10th digits must be in the range of 1 and 24")
+        if(arrayRangeValidator(argStarArray,1,9)==false){
+            console.log("Number not in accepted range")
             return process.exit(22);
         }
-        lottery.myGreekSymbolArray[0]=argGreekArray[0];
-        return dictionaryGreekSymbolArray[lottery.myGreekSymbolArray];
+        if(arrayRepeatValuesFinder(argStarArray)==true){
+            console.log("Repeated Star")
+            return process.exit(22);
+        }
+        return lottery.myStarsArray=argStarArray.sort(function(a, b){return a-b});
+    },
+    myLetterChecker : function() {
+        var argLetterArray=myArgs.slice(9,myArgs.length);
+        if (arrayTypeofValidator(argLetterArray,"string")===false){
+            console.log("10th position is not letter")
+            return process.exit(22);
+        }
+        return lottery.mySymbolArray[0]=argLetterArray[0];
     },
     numberArray:[], 
     starsArray:[], 
-    greekSymbol:[],
+    symbol:[],
     generateNumbers : function() {
         var number;//placeholder variable to hold the new number
         for (i = 0; i < 7; i++) { 
@@ -124,14 +152,15 @@ var lottery = {
         }
     return lottery.starsArray.sort(function(a, b){return a-b});
       },//similar as above function but with 2 iterations of number generation with range of 1 to 9
-    generateGreekletter  : function() {
-        var number=createNumber(0, 23);
-        lottery.greekSymbol.push(number);
-        return dictionaryGreekSymbolArray[lottery.greekSymbol];
+    generateLetter  : function() {
+        var letter=createNumber(0, 24);
+        letter=dictionarySymbolArray[letter]
+        lottery.symbol.push(letter);
+        return lottery.symbol[0];
         },
     sameNumbersArray:[],
     sameStarsArray:[],
-    sameGreekLetterArray:[],
+    sameLetterArray:[],
     numbersCompare  : function() {
         lottery.numberArray.forEach(element1 => {
             lottery.myNumbersArray.forEach(element2 => {
@@ -150,42 +179,57 @@ var lottery = {
     });
     return lottery.sameStarsArray;
     },
-    greekLetterCompare  : function() {
-        lottery.greekSymbol.forEach(element1 => {
-            lottery.myGreekSymbolArray.forEach(element2 => {
+    letterCompare  : function() {
+        lottery.symbol.forEach(element1 => {
+            lottery.mySymbolArray.forEach(element2 => {
                 if (element1===element2)
-                    lottery.sameGreekLetterArray.push(element1);
+                    lottery.sameLetterArray.push(element1);
         });
     });
-    return lottery.sameGreekLetterArray;
+    return lottery.sameLetterArray;
     },
-};// Object with user inputs, generated numbers and compare functions
+};// Object with Arrays for user and script lottery numbers, arrays for the numbers the user and the script have in common and functions to populate those arrays
+
+function myLotteryCaller(){
+    console.log("...............................");
+    console.log("Your numbers are: "+lottery.myNumbersArrayChecker());
+    console.log("Your stars are: "+lottery.myStarsChecker());
+    console.log("Your letter is: "+lottery.myLetterChecker());
+}
+function lotteryCaller(){
+    console.log("...............................");
+    console.log("The winner numbers are "+lottery.generateNumbers());
+    console.log("The winner stars are "+lottery.generateStars());
+    console.log("The winner letter is " +lottery.generateLetter());
+}
+function compareResults(){
+    console.log("...............................");//Output of what the script generated
+    lottery.numbersCompare();
+    lottery.starsCompare();
+    lottery.letterCompare()
+    if (lottery.sameNumbersArray.length===0)
+        console.log("You dont have winning Numbers");
+    if (lottery.sameNumbersArray.length!=0)
+        console.log("Your winning numbers are: "+lottery.sameNumbersArray);
+    if (lottery.sameStarsArray.length===0)
+        console.log("You dont have winning Stars");
+    if (lottery.sameStarsArray.length!=0)
+        console.log("Your winning stars are: "+lottery.sameStarsArray);
+    if (lottery.sameLetterArray.length===0)
+        console.log("You dont have winning Letter");
+    if (lottery.sameLetterArray.length!=0)
+        console.log("Your winning Letter is: "+lottery.sameLetterArray);
+}
+function oddsAnalysis(){
+    var odds=oddscalculator(lottery.sameNumbersArray.length,99,7)*oddscalculator(lottery.sameStarsArray.length,9,2)*oddscalculator(lottery.sameLetterArray.length,24,1)*100
+    console.log("...............................");//Output of what the user and the script have in common
+    console.log("The chances of winning "+lottery.sameNumbersArray.length+" number(s) and "+lottery.sameStarsArray.length+" star(s) and "+lottery.sameLetterArray.length+" letter(s) are "
+    +odds+"%");
+    console.log("...............................");//Output of the winnings odds the user got
+}
 argumentsChecker();
-console.log("...............................");
-console.log("Your numbers are: "+lottery.myNumbersArrayChecker());
-console.log("Your stars are: "+lottery.myStarsChecker());
-console.log("Your greek letter is: "+lottery.myGreekLetterChecker());
-console.log("...............................");//Output of what the user sent
-console.log("The winner numbers are "+lottery.generateNumbers());
-console.log("The winner stars are "+lottery.generateStars());
-console.log("The winner greek letter is " +lottery.generateGreekletter());
-console.log("...............................");//Output of what the script generated
-lottery.numbersCompare();
-lottery.starsCompare();
-lottery.greekLetterCompare()
-if (lottery.sameNumbersArray.length===0)
-    console.log("You dont have winning Numbers");
-if (lottery.sameNumbersArray.length!=0)
-    console.log("Your winning numbers are: "+lottery.sameNumbersArray);
-if (lottery.sameStarsArray.length===0)
-    console.log("You dont have winning Stars");
-if (lottery.sameStarsArray.length!=0)
-    console.log("Your winning stars are: "+lottery.sameStarsArray);
-if (lottery.sameGreekLetterArray.length===0)
-    console.log("You dont have winning Greek Letter");
-if (lottery.sameGreekLetterArray.length!=0)
-    console.log("Your winning Greek Letter is: "+dictionaryGreekSymbolArray[lottery.sameGreekLetterArray]);
-console.log("...............................");//Output of what the user and the script have in common
-console.log("The chances of winning "+lottery.sameNumbersArray.length+" number(s) and "+lottery.sameStarsArray.length+" star(s) and "+lottery.sameGreekLetterArray.length+" letter(s) are "
-+oddscalculator(lottery.sameNumbersArray.length,99,7)*oddscalculator(lottery.sameStarsArray.length,9,2)*oddscalculator(lottery.sameGreekLetterArray.length,24,1)*100+"%");
-console.log("...............................");//Output of the winnings odds the user got
+myLotteryCaller();
+lotteryCaller();
+compareResults();
+oddsAnalysis();
+
