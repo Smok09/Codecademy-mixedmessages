@@ -1,0 +1,79 @@
+#resultsWrap{
+    display: none;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrap{
+    display: flex;
+}
+#numbers form table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#stars form table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#letter form table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#submit form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#letters{
+    width: 350px;
+    height: 120px;
+}
+#stars{
+    width: 110px;
+    height: 120px;
+}
+
+#resultsWrap{
+    display: none;
+}
+
+#lotteryHeader #resultsHeader{
+    text-align: center;
+}
+
+#resultsBody{
+    min-height: 436px;
+    border-style: solid;
+    border-color: red;
+}
+
+#resultsBody #wrap1{
+    height: 218px;
+    justify-content: center;
+    align-items: center;
+}
+#resultsBody #wrap2{
+    height: 218px;
+    justify-content: center;
+    align-items: center;
+}
+#lotteryBody{
+    min-height: 436px;
+    border-style: solid;
+    border-color: red;
+}
+.quarter{
+width: 245px;
+height: 218px;
+}
+
+#resultsBody table{
+    justify-content: center;
+    align-items: center;
+}

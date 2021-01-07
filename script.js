@@ -1,118 +1,35 @@
-//Lottery generator. three sequences:
-//1º :: 7 (unique) Numbers (range 1 to 99) 
-//2º :: 2 (unique) Stars (range 1 to 9)
-//3º :: 1 letter (range 1 to 25)
 var myArgs;
-var cars = ["Saab", "Volvo", "BMW"];
-var numbers = [1, 1, 3];
-function arrayTypeofValidator(array,type) {
-    var returner
-    array.forEach(element => { 
-    if(typeof element !== type)
-        returner=false
-    });
-    if(returner===false)
-        return false
-    return true
-}//checks the elements typeof inside the array if one of them is diferent than the type provided the function returns false, else returns true
-function arrayRepeatValuesFinder(array) {
-    var setedArray=Array.from(new Set(array))
-    if(array.length!==setedArray.length)
-        return true
-    return false
-    
-}
-//returns true if there are repeated values in the function by converting the array to a set which only allow unique values then 
-//convert back to array if I compare the length of this array with the original and the result is diferent we have repeated values
-function arrayRangeValidator(array,min,max) {
-    var returner
-    array.forEach(element => { 
-    if(element<min||element>max)
-        returner=false
-});
-    if(returner===false)
-        return false
-    return true
-
-}
-//validates each value of the array by check if its inside the range provided, returns false if one is outside range else true
-function argumentsChecker(){
-
-myArgs = process.argv.slice(2); //slice first 2 arguments 
-for (var i = 0; i < myArgs.length-1; i++) {
-    myArgs[i]=parseInt(myArgs[i])
-}
-
-//myArgs[myArgs.length]=String(myArgs[myArgs.length])
-if (myArgs.length < 10){
-    console.log("To few arguments, you need to input 10 values")
-    return process.exit(22);
-}
-if (myArgs.length > 10){
-    console.log("To many arguments, you need to input 10 values")
-    return process.exit(22);
-}
-}
-//this function will validate the quantity of the arguments passed to the script if to few or to many the script will end 
-function factorial(n){
-    //base case
-    if(n == 0 || n == 1){
-        return 1;
-    //recursive case
-    }else{
-        return n * factorial(n-1);
-    }
-}
-//factorial function to use in oddscalculator
-function createNumber(min,max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-//random number generator with range min to max
-function oddscalculator(correctnumbers,max,attempts) {
-        var numberD=max;
-        if (correctnumbers===0){
-            for (var i = max-1; i > max-attempts; i--) {
-                numberD=numberD*(i);
-            }
-            return 1-(1/numberD)*factorial(attempts);
-        }
-
-        for (var i = max-1; i > max-correctnumbers; i--) {
-            numberD=numberD*(i);
-        }
-        return (1/numberD)*factorial(correctnumbers);
-}
-//calculate the odds of the winning numbers the user had
-
-var dictionarySymbolArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z"];//array with the greek letters
-
+var dictionarySymbolArray = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z"];
+var specialCaracters = ["!","@","#","$","^","&","%","*","(",")","+","=","-","[","]","\\","/","{","}","|",":","<",">","?",",",".",";"]
 var lottery = {
     myNumbersArray:[], 
     myStarsArray:[],
     mySymbolArray:[],
-    //arrays for the user input, will be filled after the argumentsChecker(), myNumbersArrayChecker(), myStarsChecker() and myGreekLetterChecker() functions validate the input
     myNumbersArrayChecker : function() {
-        var argNumberArray=myArgs.slice(0,myArgs.length-3); //slice first 7 elements of the arguments provided to the script into new array
+        var argNumberArray=myArgs.slice(0,myArgs.length-3);
         if(arrayRangeValidator(argNumberArray,1,99)==false){
             console.log("Number not in accepted range")
-            return process.exit(22);
+            return null;
+            //return process.exit(22);
         }
         if(arrayRepeatValuesFinder(argNumberArray)==true){
             console.log("Repeated Number")
-            return process.exit(22);
+            return null;
+            //return process.exit(22);
         }
         return lottery.myNumbersArray=argNumberArray.sort(function(a, b){return a-b});
-        //sorts in ascending order and saves the validated array into the proper array inside the object 
     },
     myStarsChecker : function() {
         var argStarArray=myArgs.slice(7,myArgs.length-1);
         if(arrayRangeValidator(argStarArray,1,9)==false){
             console.log("Number not in accepted range")
-            return process.exit(22);
+            return null;
+            //return process.exit(22);
         }
         if(arrayRepeatValuesFinder(argStarArray)==true){
             console.log("Repeated Star")
-            return process.exit(22);
+            return null;
+            //return process.exit(22);
         }
         return lottery.myStarsArray=argStarArray.sort(function(a, b){return a-b});
     },
@@ -120,7 +37,8 @@ var lottery = {
         var argLetterArray=myArgs.slice(9,myArgs.length);
         if (arrayTypeofValidator(argLetterArray,"string")===false){
             console.log("10th position is not letter")
-            return process.exit(22);
+            return null;
+            //return process.exit(22);
         }
         return lottery.mySymbolArray[0]=argLetterArray[0];
     },
@@ -128,17 +46,17 @@ var lottery = {
     starsArray:[], 
     symbol:[],
     generateNumbers : function() {
-        var number;//placeholder variable to hold the new number
+        var number;
         for (i = 0; i < 7; i++) { 
-            number=createNumber(1,99);//create new number with range 1 to 99
+            number=createNumber(1,99);
             lottery.numberArray.forEach(element => { 
                 while(element===number)
                 number=createNumber(1,99);
-            });//compare new number with all elements while truthy generate new placeholder number until falsy  
-            lottery.numberArray.push(number);//push number to array
-        }//7 iterations of the number generation and push to array 
+            });
+            lottery.numberArray.push(number);
+        }
         
-    return lottery.numberArray.sort(function(a, b){return a-b});//return array with ascending sorting
+    return lottery.numberArray.sort(function(a, b){return a-b});
       },
     generateStars  : function() {
         var number;
@@ -151,7 +69,7 @@ var lottery = {
             lottery.starsArray.push(number);
         }
     return lottery.starsArray.sort(function(a, b){return a-b});
-      },//similar as above function but with 2 iterations of number generation with range of 1 to 9
+      },
     generateLetter  : function() {
         var letter=createNumber(0, 24);
         letter=dictionarySymbolArray[letter]
@@ -188,48 +106,161 @@ var lottery = {
     });
     return lottery.sameLetterArray;
     },
-};// Object with Arrays for user and script lottery numbers, arrays for the numbers the user and the script have in common and functions to populate those arrays
+}
+function arrayTypeofValidator(array,type) {
+    var returner
+    array.forEach(element => { 
+    if(typeof element !== type)
+        returner=false
+    });
+    if(returner===false)
+        return false
+    return true
+}
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+function arrayRepeatValuesFinder(array) {
+    var setedArray=Array.from(new Set(array))
+    if(array.length!==setedArray.length)
+        return true
+    return false
+    
+}
+function arrayRangeValidator(array,min,max) {
+    var returner
+    array.forEach(element => { 
+    if(element<min||element>max)
+        returner=false
+});
+    if(returner===false)
+        return false
+    return true
 
+}
+function argumentsChecker(){
+    //myArgs = process.argv.slice(2); //slice first 2 arguments 
+    myArgs = window.param;
+    for (var i = 0; i < myArgs.length-1; i++) {
+        myArgs[i]=parseInt(myArgs[i])
+    }
+    if (myArgs.length < 10){
+        console.log("To few arguments, you need to input 10 values")
+        return null//process.exit(22);
+    }
+    if (myArgs.length > 10){
+        console.log("To many arguments, you need to input 10 values")
+        return null//process.exit(22);
+    }
+}
+function factorial(n){
+    
+    if(n == 0 || n == 1){
+        return 1;
+    
+    }else{
+        return n * factorial(n-1);
+    }
+}
+function createNumber(min,max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+function oddscalculator(correctnumbers,max,attempts) {
+        var numberD=max;
+        if (correctnumbers===0){
+            for (var i = max-1; i > max-attempts; i--) {
+                numberD=numberD*(i);
+            }
+            return 1-(1/numberD)*factorial(attempts);
+        }
+
+        for (var i = max-1; i > max-correctnumbers; i--) {
+            numberD=numberD*(i);
+        }
+        return (1/numberD)*factorial(correctnumbers);
+}
 function myLotteryCaller(){
-    console.log("...............................");
-    console.log("Your numbers are: "+lottery.myNumbersArrayChecker());
-    console.log("Your stars are: "+lottery.myStarsChecker());
-    console.log("Your letter is: "+lottery.myLetterChecker());
+    document.getElementById('myTicketNumbers').innerHTML = "Your numbers: "+lottery.myNumbersArray;
+    document.getElementById('myTicketStars').innerHTML = "Your stars: "+lottery.myStarsArray;
+    document.getElementById('myTicketArray').innerHTML = "Your letter: "+lottery.mySymbolArray;
 }
 function lotteryCaller(){
-    console.log("...............................");
-    console.log("The winner numbers are "+lottery.generateNumbers());
-    console.log("The winner stars are "+lottery.generateStars());
-    console.log("The winner letter is " +lottery.generateLetter());
+    document.getElementById('winnerTicketNumbers').innerHTML = "Numbers drawn: "+lottery.numberArray ;
+    document.getElementById('winnerTicketStars').innerHTML = "Stars drawn : "+lottery.starsArray ;
+    document.getElementById('winnerTicketArray').innerHTML = "Letter drawn: "+lottery.symbol ;
 }
 function compareResults(){
-    console.log("...............................");//Output of what the script generated
-    lottery.numbersCompare();
-    lottery.starsCompare();
-    lottery.letterCompare()
     if (lottery.sameNumbersArray.length===0)
-        console.log("You dont have winning Numbers");
+        document.getElementById('myWinsNumbers').innerHTML = "No winning Numbers";
     if (lottery.sameNumbersArray.length!=0)
-        console.log("Your winning numbers are: "+lottery.sameNumbersArray);
+        document.getElementById('myWinsNumbers').innerHTML = "Your winning Numbers are "+lottery.sameNumbersArray;
     if (lottery.sameStarsArray.length===0)
-        console.log("You dont have winning Stars");
+        document.getElementById('myWinsStars').innerHTML = "No winning Stars";
     if (lottery.sameStarsArray.length!=0)
-        console.log("Your winning stars are: "+lottery.sameStarsArray);
+        document.getElementById('myWinsStars').innerHTML = "Your winning Stars are "+lottery.sameStarsArray;
     if (lottery.sameLetterArray.length===0)
-        console.log("You dont have winning Letter");
+    document.getElementById('myWinsLetter').innerHTML = "No winning Letters";
     if (lottery.sameLetterArray.length!=0)
-        console.log("Your winning Letter is: "+lottery.sameLetterArray);
+        document.getElementById('myWinsLetter').innerHTML = "Your winning Letter is "+lottery.sameLetterArray;
+
 }
 function oddsAnalysis(){
     var odds=oddscalculator(lottery.sameNumbersArray.length,99,7)*oddscalculator(lottery.sameStarsArray.length,9,2)*oddscalculator(lottery.sameLetterArray.length,24,1)*100
-    console.log("...............................");//Output of what the user and the script have in common
-    console.log("The chances of winning "+lottery.sameNumbersArray.length+" number(s) and "+lottery.sameStarsArray.length+" star(s) and "+lottery.sameLetterArray.length+" letter(s) are "
-    +odds+"%");
-    console.log("...............................");//Output of the winnings odds the user got
+    document.getElementById('oddsNumbers').innerHTML = "with "+lottery.sameNumbersArray.length+" numbers";
+    document.getElementById('oddsStars').innerHTML = "and "+lottery.sameStarsArray.length+" stars and";
+    document.getElementById('oddsLetter').innerHTML = "and "+lottery.sameLetterArray.length+" letters are";
+    document.getElementById('oddsTotal').innerHTML = "of "+round(odds,5)+"%";
 }
-argumentsChecker();
-myLotteryCaller();
-lotteryCaller();
-compareResults();
-oddsAnalysis();
-
+function reset(){
+    lottery.numberArray=[];
+    lottery.starsArray=[];
+    lottery.symbol=[];
+    lottery.sameNumbersArray=[];
+    lottery.sameStarsArray=[];
+    lottery.sameLetterArray=[];
+}
+function debuger(enable){
+    if(enable===true){
+        console.log("-------------------------------");
+        console.log("mynumber: "+lottery.myNumbersArray);
+        console.log("mystars: "+lottery.myStarsArray);
+        console.log("myletter: "+lottery.mySymbolArray);
+        console.log("numbers: "+lottery.numberArray);
+        console.log("stars: "+lottery.starsArray);
+        console.log("letter: "+lottery.symbol);
+        console.log("won numbers: "+lottery.sameNumbersArray);
+        console.log("won stars: "+lottery.sameStarsArray);
+        console.log("won letters: "+lottery.sameLetterArray);
+        console.log("odds "+oddsAnalysis());
+        console.log("-------------------------------");
+    }
+}
+function main(){
+    reset();
+    var check1 = argumentsChecker();
+    var check2=lottery.myNumbersArrayChecker();
+    var check3=lottery.myStarsChecker();
+    var check4=lottery.myLetterChecker();
+    if(check1===null||check2===null||check3===null||check4===null){
+        console.log("invalid arguments");
+        reset();
+        myArgs=0;
+        window.param=[];
+    }else{
+        lottery.generateNumbers();
+        lottery.generateStars();
+        lottery.generateLetter()
+        lottery.numbersCompare();
+        lottery.starsCompare();
+        lottery.letterCompare()
+        document.getElementById("resultsWrap").style.display="inline";
+        myLotteryCaller();
+        lotteryCaller();
+        compareResults();
+        oddsAnalysis();
+        debuger(true);
+        reset();
+        myArgs=0;
+        window.param=[];
+    }
+}

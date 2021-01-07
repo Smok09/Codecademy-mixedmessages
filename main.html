@@ -1,86 +1,274 @@
 <html>
     <head>
-        <link rel="stylesheet" href="resources/styles.css" type="text/css">
         <title>Jorge made this</title>
+        <link rel="icon" href="http://example.com/favicon.png">
+        <script type="text/javascript" src="checkbox.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
     </head>
     <br>
     <body>
-        <section class="checkbox-type">
-            <table>
-                <thead>
-                    <tr>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option1" value="Value1">
-                            <label for="id_option1">Option1</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option2" value="Value2">
-                            <label for="id_option2">Option2</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option3" value="Value3">
-                            <label for="id_option3">Option3</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option4" value="Value4">
-                            <label for="id_option4">Option4</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option5" value="Value5">
-                            <label for="id_option5">Option5</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option6" value="Value6">
-                            <label for="id_option6">Option6</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option7" value="Value7">
-                            <label for="id_option7">Option7</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option8" value="Value8">
-                            <label for="id_option8">Option8</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option9" value="Value9">
-                            <label for="id_option9">Option9</label></th>
-                        <th><input type="checkbox" name="checkbox_type" id="id_option10" value="Value10">
-                            <label for="id_option10">Option10</label></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option11" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option12" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option13" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option14" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option15" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option16" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option17" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option18" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option19" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option20" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option31" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option32" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option33" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option34" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option35" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option36" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option37" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option38" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option19" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                        <td><input type="checkbox" name="checkbox_type" id="id_option20" value="Value1">
-                            <label for="id_option1">Option1</label></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div class="container">
+            <div id="lotteryWrap">
+                <div id="lotteryHeader">
+                    <h2>Lottery Ticket</h2>
+                </div>
+                <div id="lotteryBody">
+                    <div id="numbers">
+                        <form name=form1 method=post action=check.php>
+                            <table>
+                                <th colspan="10">Select 7 numbers</th>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname1 name=numbercheckname value=1 onclick='numbercheck(this)';>1</td>
+                                    <td><input type=checkbox id=numbercheckname2 name=numbercheckname value=2 onclick='numbercheck(this)';>2</td>
+                                    <td><input type=checkbox id=numbercheckname3 name=numbercheckname value=3 onclick='numbercheck(this)';>3</td>
+                                    <td><input type=checkbox id=numbercheckname4 name=numbercheckname value=4 onclick='numbercheck(this)';>4</td>
+                                    <td><input type=checkbox id=numbercheckname5 name=numbercheckname value=5 onclick='numbercheck(this)';>5</td>
+                                    <td><input type=checkbox id=numbercheckname6 name=numbercheckname value=6 onclick='numbercheck(this)';>6</td>
+                                    <td><input type=checkbox id=numbercheckname7 name=numbercheckname value=7 onclick='numbercheck(this)';>7</td>
+                                    <td><input type=checkbox id=numbercheckname8 name=numbercheckname value=8 onclick='numbercheck(this)';>8</td>
+                                    <td><input type=checkbox id=numbercheckname9 name=numbercheckname value=9 onclick='numbercheck(this)';>9</td>
+                                    <td><input type=checkbox id=numbercheckname10 name=numbercheckname value=10 onclick='numbercheck(this)';>10</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname11 name=numbercheckname value=11 onclick='numbercheck(this)';>11</td>
+                                    <td><input type=checkbox id=numbercheckname12 name=numbercheckname value=12 onclick='numbercheck(this)';>12</td>
+                                    <td><input type=checkbox id=numbercheckname13 name=numbercheckname value=13 onclick='numbercheck(this)';>13</td>
+                                    <td><input type=checkbox id=numbercheckname14 name=numbercheckname value=14 onclick='numbercheck(this)';>14</td>
+                                    <td><input type=checkbox id=numbercheckname15 name=numbercheckname value=15 onclick='numbercheck(this)';>15</td>
+                                    <td><input type=checkbox id=numbercheckname16 name=numbercheckname value=16 onclick='numbercheck(this)';>16</td>
+                                    <td><input type=checkbox id=numbercheckname17 name=numbercheckname value=17 onclick='numbercheck(this)';>17</td>
+                                    <td><input type=checkbox id=numbercheckname18 name=numbercheckname value=18 onclick='numbercheck(this)';>18</td>
+                                    <td><input type=checkbox id=numbercheckname19 name=numbercheckname value=19 onclick='numbercheck(this)';>19</td>
+                                    <td><input type=checkbox id=numbercheckname20 name=numbercheckname value=20 onclick='numbercheck(this)';>20</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname21 name=numbercheckname value=21 onclick='numbercheck(this)';>21</td>
+                                    <td><input type=checkbox id=numbercheckname22 name=numbercheckname value=22 onclick='numbercheck(this)';>22</td>
+                                    <td><input type=checkbox id=numbercheckname23 name=numbercheckname value=23 onclick='numbercheck(this)';>23</td>
+                                    <td><input type=checkbox id=numbercheckname24 name=numbercheckname value=24 onclick='numbercheck(this)';>24</td>
+                                    <td><input type=checkbox id=numbercheckname25 name=numbercheckname value=25 onclick='numbercheck(this)';>25</td>
+                                    <td><input type=checkbox id=numbercheckname26 name=numbercheckname value=26 onclick='numbercheck(this)';>26</td>
+                                    <td><input type=checkbox id=numbercheckname27 name=numbercheckname value=27 onclick='numbercheck(this)';>27</td>
+                                    <td><input type=checkbox id=numbercheckname28 name=numbercheckname value=28 onclick='numbercheck(this)';>28</td>
+                                    <td><input type=checkbox id=numbercheckname29 name=numbercheckname value=29 onclick='numbercheck(this)';>29</td>
+                                    <td><input type=checkbox id=numbercheckname30 name=numbercheckname value=30 onclick='numbercheck(this)';>30</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname31 name=numbercheckname value=31 onclick='numbercheck(this)';>31</td>
+                                    <td><input type=checkbox id=numbercheckname32 name=numbercheckname value=32 onclick='numbercheck(this)';>32</td>
+                                    <td><input type=checkbox id=numbercheckname33 name=numbercheckname value=33 onclick='numbercheck(this)';>33</td>
+                                    <td><input type=checkbox id=numbercheckname34 name=numbercheckname value=34 onclick='numbercheck(this)';>34</td>
+                                    <td><input type=checkbox id=numbercheckname35 name=numbercheckname value=35 onclick='numbercheck(this)';>35</td>
+                                    <td><input type=checkbox id=numbercheckname36 name=numbercheckname value=36 onclick='numbercheck(this)';>36</td>
+                                    <td><input type=checkbox id=numbercheckname37 name=numbercheckname value=37 onclick='numbercheck(this)';>37</td>
+                                    <td><input type=checkbox id=numbercheckname38 name=numbercheckname value=38 onclick='numbercheck(this)';>38</td>
+                                    <td><input type=checkbox id=numbercheckname39 name=numbercheckname value=39 onclick='numbercheck(this)';>39</td>
+                                    <td><input type=checkbox id=numbercheckname40 name=numbercheckname value=40 onclick='numbercheck(this)';>40</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname41 name=numbercheckname value=41 onclick='numbercheck(this)';>41</td>
+                                    <td><input type=checkbox id=numbercheckname42 name=numbercheckname value=42 onclick='numbercheck(this)';>42</td>
+                                    <td><input type=checkbox id=numbercheckname43 name=numbercheckname value=43 onclick='numbercheck(this)';>43</td>
+                                    <td><input type=checkbox id=numbercheckname44 name=numbercheckname value=44 onclick='numbercheck(this)';>44</td>
+                                    <td><input type=checkbox id=numbercheckname45 name=numbercheckname value=45 onclick='numbercheck(this)';>45</td>
+                                    <td><input type=checkbox id=numbercheckname46 name=numbercheckname value=46 onclick='numbercheck(this)';>46</td>
+                                    <td><input type=checkbox id=numbercheckname47 name=numbercheckname value=47 onclick='numbercheck(this)';>47</td>
+                                    <td><input type=checkbox id=numbercheckname48 name=numbercheckname value=48 onclick='numbercheck(this)';>48</td>
+                                    <td><input type=checkbox id=numbercheckname49 name=numbercheckname value=49 onclick='numbercheck(this)';>49</td>
+                                    <td><input type=checkbox id=numbercheckname50 name=numbercheckname value=50 onclick='numbercheck(this)';>50</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname51 name=numbercheckname value=51 onclick='numbercheck(this)';>51</td>
+                                    <td><input type=checkbox id=numbercheckname52 name=numbercheckname value=52 onclick='numbercheck(this)';>52</td>
+                                    <td><input type=checkbox id=numbercheckname53 name=numbercheckname value=53 onclick='numbercheck(this)';>53</td>
+                                    <td><input type=checkbox id=numbercheckname54 name=numbercheckname value=54 onclick='numbercheck(this)';>54</td>
+                                    <td><input type=checkbox id=numbercheckname55 name=numbercheckname value=55 onclick='numbercheck(this)';>55</td>
+                                    <td><input type=checkbox id=numbercheckname56 name=numbercheckname value=56 onclick='numbercheck(this)';>56</td>
+                                    <td><input type=checkbox id=numbercheckname57 name=numbercheckname value=57 onclick='numbercheck(this)';>57</td>
+                                    <td><input type=checkbox id=numbercheckname58 name=numbercheckname value=58 onclick='numbercheck(this)';>58</td>
+                                    <td><input type=checkbox id=numbercheckname59 name=numbercheckname value=59 onclick='numbercheck(this)';>59</td>
+                                    <td><input type=checkbox id=numbercheckname60 name=numbercheckname value=60 onclick='numbercheck(this)';>60</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname61 name=numbercheckname value=61 onclick='numbercheck(this)';>61</td>
+                                    <td><input type=checkbox id=numbercheckname62 name=numbercheckname value=62 onclick='numbercheck(this)';>62</td>
+                                    <td><input type=checkbox id=numbercheckname63 name=numbercheckname value=63 onclick='numbercheck(this)';>63</td>
+                                    <td><input type=checkbox id=numbercheckname64 name=numbercheckname value=64 onclick='numbercheck(this)';>64</td>
+                                    <td><input type=checkbox id=numbercheckname65 name=numbercheckname value=65 onclick='numbercheck(this)';>65</td>
+                                    <td><input type=checkbox id=numbercheckname66 name=numbercheckname value=66 onclick='numbercheck(this)';>66</td>
+                                    <td><input type=checkbox id=numbercheckname67 name=numbercheckname value=67 onclick='numbercheck(this)';>67</td>
+                                    <td><input type=checkbox id=numbercheckname68 name=numbercheckname value=68 onclick='numbercheck(this)';>68</td>
+                                    <td><input type=checkbox id=numbercheckname69 name=numbercheckname value=69 onclick='numbercheck(this)';>69</td>
+                                    <td><input type=checkbox id=numbercheckname70 name=numbercheckname value=70 onclick='numbercheck(this)';>70</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname71 name=numbercheckname value=71 onclick='numbercheck(this)';>71</td>
+                                    <td><input type=checkbox id=numbercheckname72 name=numbercheckname value=72 onclick='numbercheck(this)';>72</td>
+                                    <td><input type=checkbox id=numbercheckname73 name=numbercheckname value=73 onclick='numbercheck(this)';>73</td>
+                                    <td><input type=checkbox id=numbercheckname74 name=numbercheckname value=74 onclick='numbercheck(this)';>74</td>
+                                    <td><input type=checkbox id=numbercheckname75 name=numbercheckname value=75 onclick='numbercheck(this)';>75</td>
+                                    <td><input type=checkbox id=numbercheckname76 name=numbercheckname value=76 onclick='numbercheck(this)';>76</td>
+                                    <td><input type=checkbox id=numbercheckname77 name=numbercheckname value=77 onclick='numbercheck(this)';>77</td>
+                                    <td><input type=checkbox id=numbercheckname78 name=numbercheckname value=78 onclick='numbercheck(this)';>78</td>
+                                    <td><input type=checkbox id=numbercheckname79 name=numbercheckname value=79 onclick='numbercheck(this)';>79</td>
+                                    <td><input type=checkbox id=numbercheckname80 name=numbercheckname value=80 onclick='numbercheck(this)';>80</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname81 name=numbercheckname value=81 onclick='numbercheck(this)';>81</td>
+                                    <td><input type=checkbox id=numbercheckname82 name=numbercheckname value=82 onclick='numbercheck(this)';>82</td>
+                                    <td><input type=checkbox id=numbercheckname83 name=numbercheckname value=83 onclick='numbercheck(this)';>83</td>
+                                    <td><input type=checkbox id=numbercheckname84 name=numbercheckname value=84 onclick='numbercheck(this)';>84</td>
+                                    <td><input type=checkbox id=numbercheckname85 name=numbercheckname value=85 onclick='numbercheck(this)';>85</td>
+                                    <td><input type=checkbox id=numbercheckname86 name=numbercheckname value=86 onclick='numbercheck(this)';>86</td>
+                                    <td><input type=checkbox id=numbercheckname87 name=numbercheckname value=87 onclick='numbercheck(this)';>87</td>
+                                    <td><input type=checkbox id=numbercheckname88 name=numbercheckname value=88 onclick='numbercheck(this)';>88</td>
+                                    <td><input type=checkbox id=numbercheckname89 name=numbercheckname value=89 onclick='numbercheck(this)';>89</td>
+                                    <td><input type=checkbox id=numbercheckname90 name=numbercheckname value=90 onclick='numbercheck(this)';>90</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=numbercheckname91 name=numbercheckname value=91 onclick='numbercheck(this)';>91</td>
+                                    <td><input type=checkbox id=numbercheckname92 name=numbercheckname value=92 onclick='numbercheck(this)';>92</td>
+                                    <td><input type=checkbox id=numbercheckname93 name=numbercheckname value=93 onclick='numbercheck(this)';>93</td>
+                                    <td><input type=checkbox id=numbercheckname94 name=numbercheckname value=94 onclick='numbercheck(this)';>94</td>
+                                    <td><input type=checkbox id=numbercheckname95 name=numbercheckname value=95 onclick='numbercheck(this)';>95</td>
+                                    <td><input type=checkbox id=numbercheckname96 name=numbercheckname value=96 onclick='numbercheck(this)';>96</td>
+                                    <td><input type=checkbox id=numbercheckname97 name=numbercheckname value=97 onclick='numbercheck(this)';>97</td>
+                                    <td><input type=checkbox id=numbercheckname98 name=numbercheckname value=98 onclick='numbercheck(this)';>98</td>
+                                    <td><input type=checkbox id=numbercheckname99 name=numbercheckname value=99 onclick='numbercheck(this)';>99</td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="wrap">
+                        <div id="stars">
+                        <form name=form2 method=post action=check.php>
+                            <table>
+                                <th colspan="3">Select 2 stars</th>
+                                <tr>
+                                    <td><input type=checkbox id=starcheckname1 name=starcheckname value=1 onclick='starcheck(this)';>1</td>
+                                    <td><input type=checkbox id=starcheckname2 name=starcheckname value=2 onclick='starcheck(this)';>2</td>
+                                    <td><input type=checkbox id=starcheckname3 name=starcheckname value=3 onclick='starcheck(this)';>3</td>   
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=starcheckname4 name=starcheckname value=4 onclick='starcheck(this)';>4</td>
+                                    <td><input type=checkbox id=starcheckname5 name=starcheckname value=5 onclick='starcheck(this)';>5</td>
+                                    <td><input type=checkbox id=starcheckname6 name=starcheckname value=6 onclick='starcheck(this)';>6</td>
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=starcheckname7 name=starcheckname value=7 onclick='starcheck(this)';>7</td>
+                                    <td><input type=checkbox id=starcheckname8 name=starcheckname value=8 onclick='starcheck(this)';>8</td>
+                                    <td><input type=checkbox id=starcheckname9 name=starcheckname value=9 onclick='starcheck(this)';>9</td>
+                                </tr>
+                            </table>
+                        </form>
+                        </div>
+                        <div id="letters">
+                        <form name=form3 method=post action=check.php>
+                            <table>
+                                <form name=form3 method=post action=check.php>
+                                <th colspan="9">Select 1 letter</th>
+                                <tr>
+                                    <td><input type=checkbox id=lettercheckname1 name=lettercheckname value="A" onclick='lettercheck(this)';>A</td>
+                                    <td><input type=checkbox id=lettercheckname2 name=lettercheckname value="B" onclick='lettercheck(this)';>B</td>
+                                    <td><input type=checkbox id=lettercheckname3 name=lettercheckname value="C" onclick='lettercheck(this)';>C</td>
+                                    <td><input type=checkbox id=lettercheckname4 name=lettercheckname value="D" onclick='lettercheck(this)';>D</td>
+                                    <td><input type=checkbox id=lettercheckname5 name=lettercheckname value="E" onclick='lettercheck(this)';>E</td>
+                                    <td><input type=checkbox id=lettercheckname6 name=lettercheckname value="F" onclick='lettercheck(this)';>F</td>
+                                    <td><input type=checkbox id=lettercheckname7 name=lettercheckname value="G" onclick='lettercheck(this)';>G</td>
+                                    <td><input type=checkbox id=lettercheckname8 name=lettercheckname value="H" onclick='lettercheck(this)';>H</td>
+                                    <td><input type=checkbox id=lettercheckname9 name=lettercheckname value="I" onclick='lettercheck(this)';>I</td>   
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=lettercheckname10 name=lettercheckname value="J" onclick='lettercheck(this)';>J</td>
+                                    <td><input type=checkbox id=lettercheckname11 name=lettercheckname value="K" onclick='lettercheck(this)';>K</td>
+                                    <td><input type=checkbox id=lettercheckname12 name=lettercheckname value="L" onclick='lettercheck(this)';>L</td>
+                                    <td><input type=checkbox id=lettercheckname13 name=lettercheckname value="M" onclick='lettercheck(this)';>M</td>
+                                    <td><input type=checkbox id=lettercheckname14 name=lettercheckname value="N" onclick='lettercheck(this)';>N</td>
+                                    <td><input type=checkbox id=lettercheckname15 name=lettercheckname value="O" onclick='lettercheck(this)';>O</td>
+                                    <td><input type=checkbox id=lettercheckname16 name=lettercheckname value="P" onclick='lettercheck(this)';>P</td>
+                                    <td><input type=checkbox id=lettercheckname17 name=lettercheckname value="Q" onclick='lettercheck(this)';>Q</td>
+                                    <td><input type=checkbox id=lettercheckname18 name=lettercheckname value="R" onclick='lettercheck(this)';>R</td> 
+                                </tr>
+                                <tr>
+                                    <td><input type=checkbox id=lettercheckname19 name=lettercheckname value="S" onclick='lettercheck(this)';>S</td>
+                                    <td><input type=checkbox id=lettercheckname20 name=lettercheckname value="T" onclick='lettercheck(this)';>T</td>
+                                    <td><input type=checkbox id=lettercheckname21 name=lettercheckname value="U" onclick='lettercheck(this)';>U</td>
+                                    <td><input type=checkbox id=lettercheckname22 name=lettercheckname value="V" onclick='lettercheck(this)';>V</td>
+                                    <td><input type=checkbox id=lettercheckname23 name=lettercheckname value="X" onclick='lettercheck(this)';>X</td>
+                                    <td><input type=checkbox id=lettercheckname24 name=lettercheckname value="W" onclick='lettercheck(this)';>W</td>
+                                    <td><input type=checkbox id=lettercheckname25 name=lettercheckname value="Z" onclick='lettercheck(this)';>Z</td>
+                                </tr>
+                            </form>
+                            </table>
+                        </form>
+                        </div>
+                    </div>
+                    <div id="submit">
+                        <form name=submit method=post action=check.php>
+                            <button type="submit" form="submit" value="submit" onclick="submitforms();main();">Submit</button>
+                        </form>
+                    </div>
+                </div>    
+            </div>
+            <div id="resultsWrap">
+                <div id="resultsHeader">
+                    <h2>Your Results</h2>
+                </div>
+                <div id="resultsBody">
+                    <div class="wrap" id="wrap1">
+                        <div id="myTicket" class="quarter">
+                            <table>
+                                <th colspan="3">Your Numbers</th>
+                                <tr>
+                                    <td><div id="myTicketNumbers"></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div id="myTicketStars"></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div id="myTicketArray"></div></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="winnerTicket" class="quarter">
+                            <table>
+                                <th colspan="3">Winning Ticket</th>
+                                <tr>
+                                    <td><div id="winnerTicketNumbers"></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div id="winnerTicketStars"></div></td>
+                                </tr>
+                                <tr>
+                                    <td><div id="winnerTicketArray"></div></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="wrap" id="wrap2">
+                        <div id="myWins" class="quarter">
+                            <table>
+                                <th colspan="3">Your wins</th>
+                                <tr><td><div id="myWinsNumbers"></div></td></tr>
+                                <tr><td><div id="myWinsStars"></div></td> </tr>
+                                <tr><td><div id="myWinsLetter"></div></td></tr>
+                            </table>  
+                        </div>
+                        <div id="odds" class="quarter">
+                            <table>
+                                <th colspan="3">Odds</th>
+                                <tr><td><text>The odds of winning </text></td></tr>
+                                <tr><td><div id="oddsNumbers"></div></td></tr>
+                                <tr><td><div id="oddsStars"></div></td></tr>
+                                <tr><td><div id="oddsLetter"></div></td></tr>
+                                <tr><td><div id="oddsTotal"></div></td></tr>
+                            </table>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
-
-
-
